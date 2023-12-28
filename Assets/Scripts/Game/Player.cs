@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 
     IEnumerator fishing;
 
-    Vector3 rodPos;
     Vector3 currentPos;
 
     float rotAngle = 0.1f;
@@ -20,10 +19,8 @@ public class Player : MonoBehaviour
     {
         lineRenderer = transform.GetChild(0).GetComponent<LineRenderer>();
 
-        lineRenderer.SetPosition(0, transform.GetChild(0).position);
-        lineRenderer.SetPosition(1, transform.GetChild(0).position);
-
-        rodPos = transform.GetChild(0).position;
+        lineRenderer.SetPosition(0, Vector3.zero);
+        lineRenderer.SetPosition(1, Vector3.zero);
 
         fishing = PutDownTheRope();
 
@@ -36,7 +33,7 @@ public class Player : MonoBehaviour
     {
         RotateRod();
 
-        GoBackDetact(-34);
+        GoBackDetact(-1280f);
 
         if (Input.GetButtonDown("Fire1") && nextFishing)
         {
@@ -65,11 +62,11 @@ public class Player : MonoBehaviour
 
     void GoBackDetact(float endPos)
     {
-        if(currentPos.y <= endPos && !goBack)
+        if((currentPos.y <= endPos || Mathf.Sin(Mathf.Deg2Rad * transform.GetChild(0).rotation.z * 180 / 1.56f) * currentPos.y >= 540 || Mathf.Sin(Mathf.Deg2Rad * transform.GetChild(0).rotation.z * 180 / 1.56f) * currentPos.y <= -540) && !goBack)
         {
             goBack = true;
         }
-        else if (currentPos.y >= rodPos.y && goBack)
+        else if (currentPos.y >= 0 && goBack)
         {
             StopCoroutine(fishing);
 
@@ -82,15 +79,16 @@ public class Player : MonoBehaviour
 
     IEnumerator PutDownTheRope()
     {
-        Vector3 startPos = rodPos;
+        Vector3 startPos = new Vector3(0,0,0);
         while(true)
         {
             yield return new WaitForFixedUpdate();
 
             if(goBack)
-                currentPos = startPos += new Vector3(0, 20f * Time.fixedDeltaTime, 0);
+                currentPos = startPos += new Vector3(0, 200f * Time.fixedDeltaTime, 0);
             else
-                currentPos = startPos -= new Vector3(0, 20f * Time.fixedDeltaTime, 0);
+                currentPos = startPos -= new Vector3(0, 200f * Time.fixedDeltaTime, 0);
+
 
             lineRenderer.SetPosition(1, currentPos);
         }
