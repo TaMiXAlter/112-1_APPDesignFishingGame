@@ -1,0 +1,14 @@
+{
+    "FishOwnsNum": [
+        {
+            "Name": "NormalFish",
+            "Price": 10,
+            "Num": 2
+        },
+        {
+            "Name": "RareFish",
+            "Price": 20,
+            "Num": 0
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "Fishs":[
+        {"Name":"NormalFish", "Price":10},
+        {"Name":"FishingRod1", "Price":20}
+    ]
+}

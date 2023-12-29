@@ -1,4 +1,14 @@
 {
-    "NormalFishingRod":[{"Speed":1}],
-    "FishingRod1":[]
+    "Rod": [
+        {
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 1,
+            "IsOwn": true
+        },
+        {
+            "Name": "FishingRod1",
+            "RopeDownSpeed": 1,
+            "IsOwn": true
+        }
+    ]
 }
