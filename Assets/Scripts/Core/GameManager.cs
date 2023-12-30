@@ -16,7 +16,7 @@ public class GameManager : MySingleton<GameManager>
     private string currentRodType;
     private void Awake()
     {
-        rodStrings = JsonReader.Instance.GetAllRod();
+        // rodStrings = JsonReader.Instance.GetAllRodBaseTypes();
 
         // Var is the type you want to change.
         currentRodType = rodStrings.Find(rod => rod == "NormalFishingRod");
@@ -26,7 +26,7 @@ public class GameManager : MySingleton<GameManager>
     {
         // Testing change the rod
         if(player != null && Input.GetKeyDown(KeyCode.Q))
-            if (JsonReader.Instance.GetRodIsOwn(rodStrings.Find(rod => rod == "NormalFishingRod")))
+            if (JsonReader.Instance.GetRodDurability(rodStrings.Find(rod => rod == "NormalFishingRod")) >0)
             {
                 currentRodType = rodStrings.Find(rod => rod == "NormalFishingRod");
                 player.ChangeRodStatus(currentRodType);
@@ -36,7 +36,7 @@ public class GameManager : MySingleton<GameManager>
                 Debug.Log("NormalFishingRod Not Own");
 
         else if (player != null && Input.GetKeyDown(KeyCode.E))
-            if (JsonReader.Instance.GetRodIsOwn(rodStrings.Find(rod => rod == "FishingRod1")))
+            if (JsonReader.Instance.GetRodDurability(rodStrings.Find(rod => rod == "FishingRod1")) >0)
             {
                 currentRodType = rodStrings.Find(rod => rod == "FishingRod1");
                 player.ChangeRodStatus(currentRodType);

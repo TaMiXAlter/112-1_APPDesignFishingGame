@@ -1,38 +1,9 @@
 using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
+using Struct;
 
-#region "Json"
-[System.Serializable]
-class RodsData
-{
-    public List<Rod> Rod;
-}
-
-[System.Serializable]
-class Rod
-{
-    public string Name;
-    public float RopeDownSpeed;
-    public float MaxRopeLength;
-    public float RodAngleSpeed;
-    public bool IsOwn;
-}
-
-[System.Serializable]
-class FishsData
-{
-    public FishOwnsNum[] FishOwnsNum;
-}
-
-[System.Serializable]
-class FishOwnsNum
-{
-    public string Name;
-    public int Price;
-    public int Num;
-}
-#endregion
 
 public class JsonReader
 {
@@ -51,33 +22,35 @@ public class JsonReader
     {
         return File.ReadAllText(Application.dataPath + "/Data/" + jsonName);
     }
-
-
-    #region "Rod"
+    
+    #region "OwningRod"
     // Get if the target rod is Own.
-    public bool GetRodIsOwn(string rodName)
-    {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+    private const string RodBagPath = "RodBag.json";
 
-        bool isOwn = false;
-        foreach (Rod rod in root.Rod)
+    public int GetRodDurability(string rodName)
+    {
+        string jsonData = GetJsonText(RodBagPath);
+        AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
+
+        int myDurability = 0;
+        foreach (JsonClass.Rod rod in root.Rod)
         {
             if(rod.Name == rodName)
-                isOwn = rod.IsOwn;
+                myDurability = rod.Durability;
         }
-        return isOwn;
+        return myDurability;
     }
-
-    public void SetRodIsOwn(string rodName, bool rodIsOwn)
+    public void SetRodIsOwn(string rodName, int delta)
     {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+        string jsonData = GetJsonText(RodBagPath);
+        AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
 
-        foreach (Rod rod in root.Rod)
+        foreach (JsonClass.Rod rod in root.Rod)
         {
-            if(rod.Name == rodName)
-                rod.IsOwn = rodIsOwn;
+            if (rod.Name == rodName)
+            {
+                rod.Durability += delta;
+            }
         }
 
         string json = JsonUtility.ToJson(root, true);
@@ -92,11 +65,11 @@ public class JsonReader
     // Get the target rod's speed.
     public float GetRodSpeed(string rodName)
     {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+        string jsonData = GetJsonText(RodBagPath);
+        AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
 
         float temp = 0;
-        foreach (Rod rod in root.Rod)
+        foreach (JsonClass.Rod rod in root.Rod)
         {
             if(rod.Name == rodName)
                 temp = rod.RopeDownSpeed;
@@ -106,48 +79,52 @@ public class JsonReader
 
     public float GetMaxRopeLength(string rodName)
     {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+        string jsonData = GetJsonText(RodBagPath);
+        AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
 
         float temp = 0;
-        foreach (Rod rod in root.Rod)
+        foreach (JsonClass.Rod rod in root.Rod)
         {
             if(rod.Name == rodName)
                 temp = rod.MaxRopeLength;
         }
         return temp;
     }
-
-    public float GetRodAngleSpeed(string rodName)
+    
+    public float GetRodSpinSpeed(string rodName)
     {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+        string jsonData = GetJsonText(RodBagPath);
+        AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
 
         float temp = 0;
-        foreach (Rod rod in root.Rod)
+        foreach (JsonClass.Rod rod in root.Rod)
         {
             if(rod.Name == rodName)
-                temp = rod.RodAngleSpeed;
+                temp = rod.RodSpinSpeed;
         }
         return temp;
     }
-
-    // For gacha.
-    public List<string> GetAllRod()
-    {
-        string jsonData = GetJsonText("FishingRodTypes.json");
-        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
-
-        List<string> tempList = new List<string>();
-        foreach (Rod rod in root.Rod)
-        {
-            tempList.Add(rod.Name);
-        }
-
-        return tempList;
-    }
     #endregion
 
+    #region GaChaRodBase
+
+    private const string RodBasePath = "FishingRodBaseTypes.json";
+
+    public GaChaRodBase GetRodBaseTypes(string TypeName)
+    {
+        string jsonData = GetJsonText(RodBasePath);
+        AllGaChaRodBase root = JsonUtility.FromJson<AllGaChaRodBase>(jsonData);
+
+        GaChaRodBase temp = new GaChaRodBase() ;
+        foreach (var Base in root.Bases.Where(rod => rod.Name == TypeName))
+        {
+            temp = Base;
+        }
+
+        return temp;
+    }
+
+    #endregion
 
     #region "FishBag"
     // Get the target fish's price.
@@ -157,7 +134,7 @@ public class JsonReader
         FishsData root = JsonUtility.FromJson<FishsData>(jsonData);
 
         int temp = 0;
-        foreach (FishOwnsNum fish in root.FishOwnsNum)
+        foreach (JsonClass.FishOwnsNum fish in root.FishOwnsNum)
         {
             if(fish.Name == fishName)
                 temp = fish.Price;
@@ -172,7 +149,7 @@ public class JsonReader
         FishsData root = JsonUtility.FromJson<FishsData>(jsonData);
 
         int temp = 0;
-        foreach (FishOwnsNum fish in root.FishOwnsNum)
+        foreach (JsonClass.FishOwnsNum fish in root.FishOwnsNum)
         {
             if(fish.Name == fishName)
                 temp = fish.Num;
@@ -185,7 +162,7 @@ public class JsonReader
         string jsonData = GetJsonText("FishBag.json");
         FishsData root = JsonUtility.FromJson<FishsData>(jsonData);
 
-        foreach (FishOwnsNum fish in root.FishOwnsNum)
+        foreach (JsonClass.FishOwnsNum fish in root.FishOwnsNum)
         {
             if(fish.Name == fishName)
                 fish.Num = fishNum;
@@ -207,7 +184,7 @@ public class JsonReader
         FishsData root = JsonUtility.FromJson<FishsData>(jsonData);
 
         List<string> tempList = new List<string>();
-        foreach (FishOwnsNum fish in root.FishOwnsNum)
+        foreach (JsonClass.FishOwnsNum fish in root.FishOwnsNum)
         {
             tempList.Add(fish.Name);
         }

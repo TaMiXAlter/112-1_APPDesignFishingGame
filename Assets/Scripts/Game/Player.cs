@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
     // Change the Rod's func.
     public void ChangeRodStatus(string rodName)
     {
-        rodAngleSpeed = JsonReader.Instance.GetRodAngleSpeed(rodName);
+        rodAngleSpeed = JsonReader.Instance.GetRodSpinSpeed(rodName);
         rodSpeed = JsonReader.Instance.GetRodSpeed(rodName);
         maxRopeLength = JsonReader.Instance.GetMaxRopeLength(rodName);
     }
