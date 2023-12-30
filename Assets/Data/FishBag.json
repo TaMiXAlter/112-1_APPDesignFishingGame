@@ -3,11 +3,16 @@
         {
             "Name": "NormalFish",
             "Price": 10,
-            "Num": 2
+            "Num": 0
         },
         {
             "Name": "RareFish",
             "Price": 20,
+            "Num": 0
+        },
+        {
+            "Name": "SuperRareFish",
+            "Price": 50,
             "Num": 0
         }
     ]

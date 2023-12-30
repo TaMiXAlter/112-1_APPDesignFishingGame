@@ -13,7 +13,9 @@ class RodsData
 class Rod
 {
     public string Name;
-    public int RopeDownSpeed;
+    public float RopeDownSpeed;
+    public float MaxRopeLength;
+    public float RodAngleSpeed;
     public bool IsOwn;
 }
 
@@ -98,6 +100,34 @@ public class JsonReader
         {
             if(rod.Name == rodName)
                 temp = rod.RopeDownSpeed;
+        }
+        return temp;
+    }
+
+    public float GetMaxRopeLength(string rodName)
+    {
+        string jsonData = GetJsonText("FishingRodTypes.json");
+        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+
+        float temp = 0;
+        foreach (Rod rod in root.Rod)
+        {
+            if(rod.Name == rodName)
+                temp = rod.MaxRopeLength;
+        }
+        return temp;
+    }
+
+    public float GetRodAngleSpeed(string rodName)
+    {
+        string jsonData = GetJsonText("FishingRodTypes.json");
+        RodsData root = JsonUtility.FromJson<RodsData>(jsonData);
+
+        float temp = 0;
+        foreach (Rod rod in root.Rod)
+        {
+            if(rod.Name == rodName)
+                temp = rod.RodAngleSpeed;
         }
         return temp;
     }
