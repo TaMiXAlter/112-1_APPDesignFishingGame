@@ -14,6 +14,7 @@
         [System.Serializable]
         public class Rod
         {
+            public int ID;
             public string Name;
             public float RopeDownSpeed;
             public float MaxRopeLength;

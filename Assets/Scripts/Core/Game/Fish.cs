@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Interface;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ public class Fish : MonoBehaviour
         if(ropePosX >= leftSide && ropePosX <= rightSide && ropePosY >= bottomSide && ropePosY <= topSide)
         {
             // Write json plus one and save.
-            JsonReader.Instance.SetFishNum(fishType, JsonReader.Instance.GetFishNum(fishType) + 1);
+            FishBagData.SetFishNum(fishType, FishBagData.GetFishNum(fishType) + 1);
             Debug.Log("Get the " + fishType + "!");
             
             // Tell rod to go back.

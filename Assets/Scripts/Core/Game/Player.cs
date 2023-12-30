@@ -1,13 +1,14 @@
 using System.Collections;
+using Interface;
 using UnityEngine;
 
 
 public class Player : MonoBehaviour
 {
     // Rod status.
-    float rodAngleSpeed;
-    float maxRopeLength;
-    float rodSpeed;
+    private float rodAngleSpeed;
+    private float maxRopeLength;
+    private float rodSpeed;
 
     Vector3 ropeCurrentPos;
 
@@ -126,11 +127,11 @@ public class Player : MonoBehaviour
     //!!!---Important---!!!
 
     // Change the Rod's func.
-    public void ChangeRodStatus(string rodName)
+    public void ChangeRodStatus(int rodID)
     {
-        rodAngleSpeed = JsonReader.Instance.GetRodSpinSpeed(rodName);
-        rodSpeed = JsonReader.Instance.GetRodSpeed(rodName);
-        maxRopeLength = JsonReader.Instance.GetMaxRopeLength(rodName);
+        rodAngleSpeed = RodBagData.GetRodSpinSpeed(rodID);
+        rodSpeed = RodBagData.GetRodSpeed(rodID);
+        maxRopeLength = RodBagData.GetMaxRopeLength(rodID);
     }
 
     //!!!---Important---!!!

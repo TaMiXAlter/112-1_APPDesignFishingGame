@@ -1,9 +1,10 @@
 ﻿{
   "Rod" :[
     {
+      "ID" : 0,
       "Name": "FirstFishingRod",
-      "RopeDownSpeed": 0.5,
-      "RopeLength": 500,
+      "RopeDownSpeed": 1,
+      "MaxRopeLength": 500,
       "RodSpinSpeed": 1,
       "Durability": 20
     }
