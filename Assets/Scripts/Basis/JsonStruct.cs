@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace Struct
 {
+    
     [System.Serializable]
-    public struct AllMyRod
+    public struct RodBagRoot
     {
+        public JsonClass.EquipmentNow EquipmentNow;
         public List<JsonClass.Rod> Rod;
     }
 

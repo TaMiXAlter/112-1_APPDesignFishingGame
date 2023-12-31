@@ -11,7 +11,13 @@ namespace Interface
         public static JsonClass.Rod GetTheRod(int RodID)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            if (RodID > root.Rod.Count)
+            {
+                Debug.Log("Out of Rod Range");
+                return null;
+            }
             
             JsonClass.Rod myrod = new JsonClass.Rod();
             foreach (JsonClass.Rod rod in root.Rod)
@@ -21,12 +27,36 @@ namespace Interface
             }
             return myrod;
         }
+
+        #region get/set RodNow
+
+        public static int GetRodNow()
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            return root.EquipmentNow.RodID;
+        }
+
+        public static void SetRodNow(int NewID)
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            root.EquipmentNow.RodID = NewID;
+            
+            string json = JsonUtility.ToJson(root, true);
+            
+            JsonReader.Instance.UpdatejsonFile(json,RodBagPath);
+        }
+
+        #endregion
         
         #region get/set Durability
         public static int GetRodDurability(int RodID)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
 
             int myDurability = 0;
             foreach (JsonClass.Rod rod in root.Rod)
@@ -39,7 +69,7 @@ namespace Interface
         public static void SetRodDurability(int RodID, int delta)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
 
             foreach (JsonClass.Rod rod in root.Rod)
             {
@@ -55,52 +85,5 @@ namespace Interface
         }
 
         #endregion
-       
-
-        #region GetControlAttributes
-
-        public static float GetRodSpeed(int RodID)
-        {
-            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
-            float temp = 0;
-            foreach (JsonClass.Rod rod in root.Rod)
-            {
-                if(rod.ID == RodID)
-                    temp = rod.RopeDownSpeed;
-            }
-            return temp;
-        }
-
-        public static float GetMaxRopeLength(int RodID)
-        {
-            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
-
-            float temp = 0;
-            foreach (JsonClass.Rod rod in root.Rod)
-            {
-                if(rod.ID == RodID)
-                    temp = rod.MaxRopeLength;
-            }
-            return temp;
-        }
-        
-        public static float GetRodSpinSpeed(int RodID)
-        {
-            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
-            AllMyRod root = JsonUtility.FromJson<AllMyRod>(jsonData);
-
-            float temp = 0;
-            foreach (JsonClass.Rod rod in root.Rod)
-            {
-                if(rod.ID == RodID)
-                    temp = rod.RodSpinSpeed;
-            }
-            return temp;
-        }
-        #endregion
-
-        
     }
 }

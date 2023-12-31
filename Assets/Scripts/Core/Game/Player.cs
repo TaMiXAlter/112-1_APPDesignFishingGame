@@ -1,21 +1,21 @@
 using System.Collections;
 using Interface;
+using Struct;
 using UnityEngine;
 
 
 public class Player : MonoBehaviour
 {
     // Rod status.
-    private float rodAngleSpeed;
-    private float maxRopeLength;
-    private float rodSpeed;
+    private JsonClass.Rod currentRod { get; set; }
 
-    Vector3 ropeCurrentPos;
+    private Vector3 ropeCurrentPos;
 
     // Rod var & component.
     bool goBack, nextFishing, startRot;
     IEnumerator putDownTheRope;
     private LineRenderer lineRenderer;
+    private float GoBackSpeedUP = 3.0f;
 
 
     void Awake()
@@ -26,8 +26,6 @@ public class Player : MonoBehaviour
 
     void OnEnable()
     {   
-        // Rigister to GM. (Let Gm to change the rod type, see the change rod type on this script's line 129.)
-        GameManager.Instance.RigisterPlayer(this);
         // Set IEnumerator func and init fishing.
         SetFishing(true);
         putDownTheRope = PutDownTheRope();
@@ -40,7 +38,7 @@ public class Player : MonoBehaviour
         RotateRod();
 
         // Rope max length detact.
-        GoBackDetact(maxRopeLength * -1);
+        GoBackDetact( currentRod.MaxRopeLength * -1);
 
         // Fishing detact.
         if (Input.GetButtonDown("Fire1") && nextFishing)
@@ -63,7 +61,6 @@ public class Player : MonoBehaviour
         SetLineRendererPosition(Vector3.zero);
         ropeCurrentPos = Vector3.zero;
 
-        GameManager.Instance.UnRigisterPlayer();
     }
 
     void RotateRod()
@@ -72,11 +69,11 @@ public class Player : MonoBehaviour
         if(startRot)
         {   
             if (transform.GetChild(0).rotation.z >= 0.3f)
-                rodAngleSpeed *= -1;
+                currentRod.RodSpinSpeed *= -1;
             else if (transform.GetChild(0).rotation.z <= -0.3f)
-                rodAngleSpeed *= -1;
+                currentRod.RodSpinSpeed *= -1;
 
-            transform.GetChild(0).Rotate(transform.rotation.x, transform.rotation.y, 0.1f * rodAngleSpeed);
+            transform.GetChild(0).Rotate(transform.rotation.x, transform.rotation.y, 0.1f * currentRod.RodSpinSpeed);
         }
     }
 
@@ -112,11 +109,11 @@ public class Player : MonoBehaviour
 
             if(goBack)
             {
-                ropeCurrentPos = startPos += new Vector3(0, 200f * Time.fixedDeltaTime * rodSpeed, 0);
+                ropeCurrentPos = startPos += new Vector3(0, 200f * Time.fixedDeltaTime * currentRod.RopeDownSpeed*GoBackSpeedUP, 0);
             }
             else
             {
-                ropeCurrentPos = startPos -= new Vector3(0, 200f * Time.fixedDeltaTime * rodSpeed, 0);
+                ropeCurrentPos = startPos -= new Vector3(0, 200f * Time.fixedDeltaTime * currentRod.RopeDownSpeed, 0);
                 GameManager.Instance.SetRopePoint(Mathf.Sin(-Mathf.Deg2Rad * transform.GetChild(0).rotation.z * 180 / 1.56f) * ropeCurrentPos.y, Mathf.Cos(Mathf.Deg2Rad * transform.GetChild(0).rotation.z * 180 / 1.56f) * ropeCurrentPos.y);
             }
 
@@ -129,9 +126,7 @@ public class Player : MonoBehaviour
     // Change the Rod's func.
     public void ChangeRodStatus(int rodID)
     {
-        rodAngleSpeed = RodBagData.GetRodSpinSpeed(rodID);
-        rodSpeed = RodBagData.GetRodSpeed(rodID);
-        maxRopeLength = RodBagData.GetMaxRopeLength(rodID);
+        currentRod = RodBagData.GetTheRod(rodID);
     }
 
     //!!!---Important---!!!

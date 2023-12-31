@@ -4,6 +4,12 @@
     public class JsonClass
     {
         [System.Serializable]
+        public class EquipmentNow
+        {
+            public int RodID;
+        }
+            
+        [System.Serializable]
         public class FishOwnsNum
         {
             public string Name;
