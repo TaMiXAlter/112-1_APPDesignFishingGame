@@ -7,6 +7,7 @@
         public class EquipmentNow
         {
             public int RodID;
+            public int Money;
         }
             
         [System.Serializable]

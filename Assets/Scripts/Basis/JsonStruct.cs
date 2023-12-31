@@ -24,11 +24,11 @@ namespace Struct
     public struct GaChaRodBase
     {
         public string Name;
-        public  float RopeDownSpeedMin;
-        public  float RopeDownSpeedMax;
-        public  float RopeLengthMin;
-        public float RopeLengthMax;
-        public  float RodSpinSpeed;
+        public  int RopeDownSpeedMin;
+        public  int RopeDownSpeedMax;
+        public  int RopeLengthMin;
+        public int RopeLengthMax;
+        public  int RodSpinSpeed;
         public  int DurabilityMax;
     }
     

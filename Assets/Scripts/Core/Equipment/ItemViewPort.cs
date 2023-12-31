@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Interface;
@@ -8,16 +9,30 @@ using UnityEngine;
 public class ItemViewPort : MonoBehaviour
 {
     public GameObject _equipmentButtonBase;
-    public List<EquipmentButton> EquipmentButtons;
+    private List<EquipmentButton> Equipments;
     private float gridHright = 350.0f;
-    void Start()
+    public EquipmentButton _CurrentRod;
+    void OnEnable()
     {
         spawnEquipmentButton(0);
-
     }
+
+    private void OnDisable()
+    {
+        
+    }
+
     //這是遞迴
     void spawnEquipmentButton(int ID)
     {
+        //檢查是否跟現在一樣
+        int nextID = ID + 1;
+        if (ID == RodBagData.GetRodNow())
+        {
+            spawnEquipmentButton(nextID);
+            return;
+        }
+
         JsonClass.Rod rod = RodBagData.GetTheRod(ID);
         //結束
         if (rod == null)
@@ -27,11 +42,10 @@ public class ItemViewPort : MonoBehaviour
         };
         
         EquipmentButton _equipmentButton = Instantiate(_equipmentButtonBase,transform).GetComponent<EquipmentButton>();
-        _equipmentButton.SetupText(rod.Name,rod.RopeDownSpeed,rod.MaxRopeLength,rod.RodSpinSpeed);
+        
         _equipmentButton.Init(ID);
-        EquipmentButtons.Add(_equipmentButton);
-        if (ID == RodBagData.GetRodNow()) _equipmentButton.HighLight();
-        int nextID = ID + 1;
+        _equipmentButton.SetupText(rod.Name,rod.RopeDownSpeed,rod.MaxRopeLength,rod.RodSpinSpeed);
+        
         spawnEquipmentButton(nextID);
     }
 
@@ -40,7 +54,4 @@ public class ItemViewPort : MonoBehaviour
         RectTransform rectTransform = GetComponent<RectTransform>();
         rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -bottom);
     }
-
-
-    
 }

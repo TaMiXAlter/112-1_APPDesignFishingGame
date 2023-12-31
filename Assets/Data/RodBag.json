@@ -1,47 +1,48 @@
-﻿{
-  "EquipmentNow": {
-    "RodID" : 1
-  },
-  "Rod" :[
-    {
-      "ID" : 0,
-      "Name": "FirstFishingRod",
-      "RopeDownSpeed": 1,
-      "MaxRopeLength": 500,
-      "RodSpinSpeed": 1,
-      "Durability": 20
-    },{
-      "ID" : 1,
-      "Name": "SecondFishingRod",
-      "RopeDownSpeed": 2,
-      "MaxRopeLength": 700,
-      "RodSpinSpeed": 1,
-      "Durability": 20
-    }
-  ,{
-      "ID" : 2,
-      "Name": "SecondFishingRod",
-      "RopeDownSpeed": 2,
-      "MaxRopeLength": 700,
-      "RodSpinSpeed": 1,
-      "Durability": 20
-    }
-  ,{
-      "ID" : 3,
-      "Name": "SecondFishingRod",
-      "RopeDownSpeed": 2,
-      "MaxRopeLength": 700,
-      "RodSpinSpeed": 1,
-      "Durability": 20
-    }
-  ,{
-      "ID" : 4,
-      "Name": "SecondFishingRod",
-      "RopeDownSpeed": 2,
-      "MaxRopeLength": 700,
-      "RodSpinSpeed": 1,
-      "Durability": 20
-    }
-  ]
-  
+{
+    "EquipmentNow": {
+        "RodID": 1,
+        "Money": 100
+    },
+    "Rod": [
+        {
+            "ID": 0,
+            "Name": "FirstFishingRod",
+            "RopeDownSpeed": 1.0,
+            "MaxRopeLength": 500.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 20
+        },
+        {
+            "ID": 1,
+            "Name": "SecondFishingRod",
+            "RopeDownSpeed": 2.0,
+            "MaxRopeLength": 700.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 20
+        },
+        {
+            "ID": 2,
+            "Name": "qwerFishingRod",
+            "RopeDownSpeed": 2.0,
+            "MaxRopeLength": 700.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 20
+        },
+        {
+            "ID": 3,
+            "Name": "ewewFishingRod",
+            "RopeDownSpeed": 2.0,
+            "MaxRopeLength": 700.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 20
+        },
+        {
+            "ID": 4,
+            "Name": "SasdvFishingRod",
+            "RopeDownSpeed": 2.0,
+            "MaxRopeLength": 700.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 20
+        }
+    ]
 }

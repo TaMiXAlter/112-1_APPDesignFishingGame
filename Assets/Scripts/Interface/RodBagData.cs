@@ -25,7 +25,42 @@ namespace Interface
             }
             return myrod;
         }
+        
+        public static void AddRod(JsonClass.Rod newRod)
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+            
+            root.Rod.Add(newRod);
+            
+            string json = JsonUtility.ToJson(root, true);
+            
+            JsonReader.Instance.UpdatejsonFile(json,RodBagPath);
+        }
+        
+        #region get/set money
 
+        public static int GetMoney()
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            return root.EquipmentNow.Money;
+        }
+        
+        public static void SetRMoney(int delta)
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            root.EquipmentNow.Money += delta;
+            
+            string json = JsonUtility.ToJson(root, true);
+            
+            JsonReader.Instance.UpdatejsonFile(json,RodBagPath);
+        }
+
+        #endregion
         #region get/set RodNow
 
         public static int GetRodNow()
@@ -49,7 +84,6 @@ namespace Interface
         }
 
         #endregion
-        
         #region get/set Durability
         public static int GetRodDurability(int RodID)
         {
