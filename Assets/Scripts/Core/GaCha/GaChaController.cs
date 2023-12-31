@@ -1,26 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Interface;
 using Struct;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
+
 
 public class GaChaController : MonoBehaviour
 {
     private TMP_Text showMoney,ShowtheRod;
     private Button gaChaButton;
-    private Random _random;
 
-    private string[] names = new[] { "NormalFishingRod" ,"RareFishingRod","SuperRareFishingRod"};
+    private readonly string[] names = new string[3] { "NormalFishingRod" ,"RareFishingRod","SuperRareFishingRod"};
     void Awake()
     {
         ShowtheRod = transform.Find("GaChaRodBase").GetComponent<TMP_Text>();
         showMoney = transform.Find("ShowMoney").GetComponent<TMP_Text>();
-        gaChaButton = transform.Find("GaChaButton").GetComponent<Button>();
+        gaChaButton = transform.Find("GachaButton").GetComponent<Button>();
     }
 
     private void OnEnable()
@@ -42,19 +39,26 @@ public class GaChaController : MonoBehaviour
     void Gacha()
     {
         JsonClass.Rod newRod = gaChaRod();
+        print(newRod.Name);
+        print(newRod.RopeDownSpeed);
+        print(newRod.RodSpinSpeed);
         ShowtheRod.text = newRod.Name + "\n Speed: " + newRod.RopeDownSpeed + "\n length: " + newRod.MaxRopeLength +
                           "\n Spin: " + newRod.RodSpinSpeed;
         RodBagData.AddRod(newRod);
-    }
+   }
 
     JsonClass.Rod gaChaRod()
     {
         JsonClass.Rod outputrod = new JsonClass.Rod();
-        string getthepriceName = names[_random.Next(0, 2)];
+        string getthepriceName = names[Random.Range(0,2)];
         GaChaRodBase gacharod = GaChaData.GetRodBaseTypes(getthepriceName);
         outputrod.Name = getthepriceName;
-        outputrod.RopeDownSpeed = _random.Next(gacharod.RopeDownSpeedMin, gacharod.RopeDownSpeedMax)/10;
-        outputrod.MaxRopeLength = _random.Next(gacharod.RopeLengthMin, gacharod.RopeLengthMax);
+        
+        print(Random.Range(gacharod.RopeDownSpeedMin, gacharod.RopeDownSpeedMax));
+        print(gacharod.RopeDownSpeedMin);
+        
+        outputrod.RopeDownSpeed = Random.Range(gacharod.RopeDownSpeedMin, gacharod.RopeDownSpeedMax);
+        outputrod.MaxRopeLength = Random.Range(gacharod.RopeLengthMin, gacharod.RopeLengthMax);
         outputrod.RodSpinSpeed = gacharod.RodSpinSpeed;
 
         return outputrod;

@@ -2,8 +2,8 @@
     "Rod": [
         {
             "Name": "NormalFishingRod",
-            "RopeDownSpeedMin": 5,
-            "RopeDownSpeedMax": 15,
+            "RopeDownSpeedMin": 0.5,
+            "RopeDownSpeedMax": 1.5,
             "RopeLengthMin": 500,
             "RopeLengthMax": 700,
             "RodSpinSpeed": 1,
@@ -11,8 +11,8 @@
         },
         {
             "Name": "RareFishingRod",
-            "RopeDownSpeedMin": 17,
-            "RopeDownSpeedMax": 30,
+            "RopeDownSpeedMin": 1.7,
+            "RopeDownSpeedMax": 3.0,
             "RopeLengthMin": 900,
             "RopeLengthMax": 1200,
             "RodSpinSpeed": 2,
@@ -20,8 +20,8 @@
         },
         {
             "Name": "SuperRareFishingRod",
-            "RopeDownSpeedMin": 45,
-            "RopeDownSpeedMax": 55,
+            "RopeDownSpeedMin": 4.5,
+            "RopeDownSpeedMax": 5.5,
             "RopeLengthMin": 1300,
             "RopeLengthMax": 1700,
             "RodSpinSpeed": 3,

@@ -43,6 +43,46 @@
             "MaxRopeLength": 700.0,
             "RodSpinSpeed": 1.0,
             "Durability": 20
+        },
+        {
+            "ID": 0,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 0.0,
+            "MaxRopeLength": 0.0,
+            "RodSpinSpeed": 0.0,
+            "Durability": 0
+        },
+        {
+            "ID": 0,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 0.0,
+            "MaxRopeLength": 0.0,
+            "RodSpinSpeed": 0.0,
+            "Durability": 0
+        },
+        {
+            "ID": 0,
+            "Name": "RareFishingRod",
+            "RopeDownSpeed": 0.0,
+            "MaxRopeLength": 0.0,
+            "RodSpinSpeed": 0.0,
+            "Durability": 0
+        },
+        {
+            "ID": 0,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 0.0,
+            "MaxRopeLength": 0.0,
+            "RodSpinSpeed": 0.0,
+            "Durability": 0
+        },
+        {
+            "ID": 0,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 0.0,
+            "MaxRopeLength": 0.0,
+            "RodSpinSpeed": 0.0,
+            "Durability": 0
         }
     ]
 }
