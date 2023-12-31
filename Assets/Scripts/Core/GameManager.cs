@@ -14,7 +14,6 @@ public class GameManager : MySingleton<GameManager>
 
     private void Awake()
     {
-        print(RodBagData.GetRodNow());
         InitializationRod(RodBagData.GetRodNow());
     }
 

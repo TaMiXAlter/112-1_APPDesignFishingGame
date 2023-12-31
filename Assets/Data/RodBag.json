@@ -18,6 +18,30 @@
       "RodSpinSpeed": 1,
       "Durability": 20
     }
+  ,{
+      "ID" : 2,
+      "Name": "SecondFishingRod",
+      "RopeDownSpeed": 2,
+      "MaxRopeLength": 700,
+      "RodSpinSpeed": 1,
+      "Durability": 20
+    }
+  ,{
+      "ID" : 3,
+      "Name": "SecondFishingRod",
+      "RopeDownSpeed": 2,
+      "MaxRopeLength": 700,
+      "RodSpinSpeed": 1,
+      "Durability": 20
+    }
+  ,{
+      "ID" : 4,
+      "Name": "SecondFishingRod",
+      "RopeDownSpeed": 2,
+      "MaxRopeLength": 700,
+      "RodSpinSpeed": 1,
+      "Durability": 20
+    }
   ]
   
 }

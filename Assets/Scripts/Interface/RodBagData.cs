@@ -6,14 +6,12 @@ namespace Interface
     public static class RodBagData
     {
         private const string RodBagPath = "RodBag.json";
-
-        
         public static JsonClass.Rod GetTheRod(int RodID)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
             RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
 
-            if (RodID > root.Rod.Count)
+            if (RodID > root.Rod.Count-1)
             {
                 Debug.Log("Out of Rod Range");
                 return null;
