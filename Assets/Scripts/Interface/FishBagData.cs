@@ -7,6 +7,20 @@ namespace Interface
 {
     public class FishBagData
     {
+
+            public static float GetFishSpeed(string fishName)
+            {
+                string jsonData = JsonReader.Instance.GetJsonText("FishBag.json");
+                FishsData root = JsonUtility.FromJson<FishsData>(jsonData);
+                
+                foreach (JsonClass.FishOwnsNum fish in root.FishOwnsNum)
+                {
+                    if (fish.Name == fishName) return fish.Speed;
+                }
+
+                Debug.Log("get no fish speed");
+                return 0;
+            }
             // Get the target fish's price.
             public static int GetFishPrice(string fishName)
             {

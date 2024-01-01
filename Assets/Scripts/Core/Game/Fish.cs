@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Interface;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,15 @@ public class Fish : MonoBehaviour
     float rightSide;
     float topSide;
     float bottomSide;
+
+    private Rigidbody2D _rigidbody2D;
+
+    private float speed = 100f;
     // Start is called before the first frame update
     void Awake()
     {
         rt = GetComponent<RectTransform>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -75,11 +81,23 @@ public class Fish : MonoBehaviour
                 fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
                 break;
         }
+        
+        speed = FishBagData.GetFishSpeed(fishType);
+
+        if (transform.localPosition.x > 0) speed *= -1;
+    }
+
+    void swim()
+    {
+        if(transform.localPosition.x is > 600 or < -600) Destroy(gameObject);
+        
+        _rigidbody2D.velocity = new Vector2(speed, 0);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+
         // Checked if the rope is in the rect / get the fish.
         float ropePosX = GameManager.Instance.GetRopePoint().x;
         float ropePosY = GameManager.Instance.GetRopePoint().y;
@@ -93,5 +111,7 @@ public class Fish : MonoBehaviour
             GameManager.Instance.SetIsGetFish(true);
             Destroy(this.gameObject);
         }
+
+        swim();
     }
 }
