@@ -1,7 +1,7 @@
 {
     "EquipmentNow": {
-        "RodID": 0,
-        "Money": 0
+        "RodID": 1,
+        "Money": 10
     },
     "Rod": [
         {

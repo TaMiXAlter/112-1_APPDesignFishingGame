@@ -31,13 +31,8 @@ public class Fish : MonoBehaviour
     {
         fishImage = GetComponent<Image>();
 
-        Rect rect = rt.rect;
-
         // Get the present rect status.
-        leftSide = rt.anchoredPosition.x - rect.width / 2;
-        rightSide = rt.anchoredPosition.x + rect.width / 2;
-        topSide = rt.anchoredPosition.y + rect.height / 2;
-        bottomSide = rt.anchoredPosition.y - rect.height / 2;
+        GetMyBox();
 
         if(topSide <= -450 && topSide > -750)
         {
@@ -101,6 +96,7 @@ public class Fish : MonoBehaviour
         // Checked if the rope is in the rect / get the fish.
         float ropePosX = GameManager.Instance.GetRopePoint().x;
         float ropePosY = GameManager.Instance.GetRopePoint().y;
+        GetMyBox();
         if(ropePosX >= leftSide && ropePosX <= rightSide && ropePosY >= bottomSide && ropePosY <= topSide)
         {
             // Write json plus one and save.
@@ -113,5 +109,14 @@ public class Fish : MonoBehaviour
         }
 
         swim();
+    }
+
+    void GetMyBox()
+    {
+        Rect rect = rt.rect;
+        leftSide = rt.anchoredPosition.x - rect.width / 2;
+        rightSide = rt.anchoredPosition.x + rect.width / 2;
+        topSide = rt.anchoredPosition.y + rect.height / 2;
+        bottomSide = rt.anchoredPosition.y - rect.height / 2;
     }
 }
