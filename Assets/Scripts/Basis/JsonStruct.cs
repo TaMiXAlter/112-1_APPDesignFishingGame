@@ -35,7 +35,7 @@ namespace Struct
     [System.Serializable]
     public struct AllGaChaRodBase
     {
-        public List<GaChaRodBase> Bases;
+        public List<GaChaRodBase> Rod;
     }
 
         #endregion

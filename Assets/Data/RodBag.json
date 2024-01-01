@@ -1,7 +1,7 @@
 {
     "EquipmentNow": {
-        "RodID": 1,
-        "Money": 100
+        "RodID": 4,
+        "Money": 1700
     },
     "Rod": [
         {
@@ -22,66 +22,26 @@
         },
         {
             "ID": 2,
-            "Name": "qwerFishingRod",
-            "RopeDownSpeed": 2.0,
-            "MaxRopeLength": 700.0,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 0.9304052591323853,
+            "MaxRopeLength": 563.0,
             "RodSpinSpeed": 1.0,
-            "Durability": 20
+            "Durability": 0
         },
         {
             "ID": 3,
-            "Name": "ewewFishingRod",
-            "RopeDownSpeed": 2.0,
-            "MaxRopeLength": 700.0,
-            "RodSpinSpeed": 1.0,
-            "Durability": 20
+            "Name": "RareFishingRod",
+            "RopeDownSpeed": 1.925838828086853,
+            "MaxRopeLength": 1094.0,
+            "RodSpinSpeed": 2.0,
+            "Durability": 0
         },
         {
             "ID": 4,
-            "Name": "SasdvFishingRod",
-            "RopeDownSpeed": 2.0,
-            "MaxRopeLength": 700.0,
-            "RodSpinSpeed": 1.0,
-            "Durability": 20
-        },
-        {
-            "ID": 0,
-            "Name": "NormalFishingRod",
-            "RopeDownSpeed": 0.0,
-            "MaxRopeLength": 0.0,
-            "RodSpinSpeed": 0.0,
-            "Durability": 0
-        },
-        {
-            "ID": 0,
-            "Name": "NormalFishingRod",
-            "RopeDownSpeed": 0.0,
-            "MaxRopeLength": 0.0,
-            "RodSpinSpeed": 0.0,
-            "Durability": 0
-        },
-        {
-            "ID": 0,
-            "Name": "RareFishingRod",
-            "RopeDownSpeed": 0.0,
-            "MaxRopeLength": 0.0,
-            "RodSpinSpeed": 0.0,
-            "Durability": 0
-        },
-        {
-            "ID": 0,
-            "Name": "NormalFishingRod",
-            "RopeDownSpeed": 0.0,
-            "MaxRopeLength": 0.0,
-            "RodSpinSpeed": 0.0,
-            "Durability": 0
-        },
-        {
-            "ID": 0,
-            "Name": "NormalFishingRod",
-            "RopeDownSpeed": 0.0,
-            "MaxRopeLength": 0.0,
-            "RodSpinSpeed": 0.0,
+            "Name": "SuperRareFishingRod",
+            "RopeDownSpeed": 4.811026573181152,
+            "MaxRopeLength": 1548.0,
+            "RodSpinSpeed": 3.0,
             "Durability": 0
         }
     ]

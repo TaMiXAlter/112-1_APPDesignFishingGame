@@ -12,7 +12,7 @@ public class GaChaController : MonoBehaviour
     private TMP_Text showMoney,ShowtheRod;
     private Button gaChaButton;
 
-    private readonly string[] names = new string[3] { "NormalFishingRod" ,"RareFishingRod","SuperRareFishingRod"};
+    private readonly string[] names = { "NormalFishingRod" ,"RareFishingRod","SuperRareFishingRod"};
     void Awake()
     {
         ShowtheRod = transform.Find("GaChaRodBase").GetComponent<TMP_Text>();
@@ -38,8 +38,10 @@ public class GaChaController : MonoBehaviour
 
     void Gacha()
     {
+        if( RodBagData.GetMoney() <100 ) {ShowtheRod.text = "you have no enough money"; return;}
+        
+        RodBagData.SetRMoney(-100);
         JsonClass.Rod newRod = gaChaRod();
-        print(newRod.Name);
         print(newRod.RopeDownSpeed);
         print(newRod.RodSpinSpeed);
         ShowtheRod.text = newRod.Name + "\n Speed: " + newRod.RopeDownSpeed + "\n length: " + newRod.MaxRopeLength +
@@ -50,17 +52,16 @@ public class GaChaController : MonoBehaviour
     JsonClass.Rod gaChaRod()
     {
         JsonClass.Rod outputrod = new JsonClass.Rod();
-        string getthepriceName = names[Random.Range(0,2)];
-        GaChaRodBase gacharod = GaChaData.GetRodBaseTypes(getthepriceName);
-        outputrod.Name = getthepriceName;
+        string GetThePriceName = names[Random.Range(0,3)];
         
-        print(Random.Range(gacharod.RopeDownSpeedMin, gacharod.RopeDownSpeedMax));
+        GaChaRodBase gacharod = GaChaData.GetRodBaseTypes(GetThePriceName);
+        outputrod.Name = GetThePriceName;
         print(gacharod.RopeDownSpeedMin);
         
         outputrod.RopeDownSpeed = Random.Range(gacharod.RopeDownSpeedMin, gacharod.RopeDownSpeedMax);
         outputrod.MaxRopeLength = Random.Range(gacharod.RopeLengthMin, gacharod.RopeLengthMax);
         outputrod.RodSpinSpeed = gacharod.RodSpinSpeed;
-
+        outputrod.ID = RodBagData.GetNewId();
         return outputrod;
     }
 }

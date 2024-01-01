@@ -1,6 +1,7 @@
 
 using Controller;
 using Interface;
+using Struct;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class EquipmentButton : MonoBehaviour
 {
     private Button equipButton;
     private TMP_Text _text;
-    private int MyId { get;set; }
+    private JsonClass.Rod Myrod { get;set; }
 
     private void Awake()
     {
@@ -17,21 +18,21 @@ public class EquipmentButton : MonoBehaviour
         _text = gameObject.GetComponentInChildren<TMP_Text>();
     }
 
-    public void Init(int SetId)
+    public void Init(JsonClass.Rod rod)
     {
-        MyId = SetId;
+        Myrod = rod;
         equipButton.onClick.AddListener(ButtonPress);
     }
     private void OnDisable()
     {
-        print("dis");
         Destroy(this.gameObject);
     }
     private void ButtonPress()
     {
-        RodBagData.SetRodNow(MyId);
+        GameManager.Instance.player.ChangeRodStatus(Myrod.ID);
+        RodBagData.SetRodNow(Myrod);
         ViewManager.Instance.PreviousView();
-        print(RodBagData.GetRodNow());
+        print(RodBagData.GetRodNowID());
     }
 
     public void SetupText(string name,float Speed,float lenth,float spin)

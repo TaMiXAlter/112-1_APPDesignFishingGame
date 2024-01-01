@@ -7,14 +7,14 @@ using UnityEngine;
 public class GameManager : MySingleton<GameManager>
 {
     // Player parameter.
-    [SerializeField] private Player player;
+    public Player player;
     private Vector2 ropePoint;
     private bool isGetFish;
     // GameManager parameter.
 
     private void Awake()
     {
-        InitializationRod(RodBagData.GetRodNow());
+        InitializationRod(RodBagData.GetRodNowID());
     }
 
     private void InitializationRod(int SetupRodID)=>player.ChangeRodStatus(SetupRodID);

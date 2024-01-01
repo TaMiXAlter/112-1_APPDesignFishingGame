@@ -6,16 +6,28 @@ namespace Interface
     public static class RodBagData
     {
         private const string RodBagPath = "RodBag.json";
+
+        public static int GetNewId()
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
+
+            int newID = 0;
+            foreach (var VARIABLE in root.Rod)
+            {
+                if (VARIABLE.ID == newID) newID = VARIABLE.ID + 1;
+            }
+
+            return newID;
+        }
+
+        #region Add/get
         public static JsonClass.Rod GetTheRod(int RodID)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
             RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
 
-            if (RodID > root.Rod.Count-1)
-            {
-                Debug.Log("Out of Rod Range");
-                return null;
-            }
+            if (RodID > root.Rod.Count-1) { Debug.Log("Out of Rod Range"); return null; }
             
             JsonClass.Rod myrod = new JsonClass.Rod();
             foreach (JsonClass.Rod rod in root.Rod)
@@ -25,7 +37,11 @@ namespace Interface
             }
             return myrod;
         }
-        
+        public static RodBagRoot GetAllRod()
+        {
+            string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
+            return JsonUtility.FromJson<RodBagRoot>(jsonData);
+        }
         public static void AddRod(JsonClass.Rod newRod)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
@@ -37,7 +53,7 @@ namespace Interface
             
             JsonReader.Instance.UpdatejsonFile(json,RodBagPath);
         }
-        
+        #endregion
         #region get/set money
 
         public static int GetMoney()
@@ -63,15 +79,18 @@ namespace Interface
         #endregion
         #region get/set RodNow
 
-        public static int GetRodNow()
+        public static int GetRodNowID()
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
             RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
 
             return root.EquipmentNow.RodID;
         }
-
-        public static void SetRodNow(int NewID)
+        public static JsonClass.Rod GetRodNow ()
+        {
+            return GetTheRod(GetRodNowID());
+        }
+        public static void SetRodNowFromID(int NewID)
         {
             string jsonData = JsonReader.Instance.GetJsonText(RodBagPath);
             RodBagRoot root = JsonUtility.FromJson<RodBagRoot>(jsonData);
@@ -81,6 +100,11 @@ namespace Interface
             string json = JsonUtility.ToJson(root, true);
             
             JsonReader.Instance.UpdatejsonFile(json,RodBagPath);
+        }
+
+        public static void SetRodNow(JsonClass.Rod rod)
+        {
+            SetRodNowFromID(rod.ID);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Struct;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace Interface
@@ -13,13 +14,12 @@ namespace Interface
             string jsonData = JsonReader.Instance.GetJsonText(RodBasePath);
             AllGaChaRodBase root = JsonUtility.FromJson<AllGaChaRodBase>(jsonData);
 
-            GaChaRodBase temp = new GaChaRodBase() ;
-            foreach (var Base in root.Bases.Where(rod => rod.Name == TypeName))
+            foreach (var VARIABLE in root.Rod)
             {
-                temp = Base;
+                if(VARIABLE.Name == TypeName) return VARIABLE;
             }
-            
-            return temp;
+            Debug.Log("find no RodBase");
+            return new GaChaRodBase();
         }
     }
 }

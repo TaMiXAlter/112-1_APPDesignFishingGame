@@ -14,39 +14,25 @@ public class ItemViewPort : MonoBehaviour
     public EquipmentButton _CurrentRod;
     void OnEnable()
     {
-        spawnEquipmentButton(0);
+        spawnEquipmentButton();
     }
 
     private void OnDisable()
     {
         
     }
-
-    //這是遞迴
-    void spawnEquipmentButton(int ID)
+    
+    void spawnEquipmentButton()
     {
-        //檢查是否跟現在一樣
-        int nextID = ID + 1;
-        if (ID == RodBagData.GetRodNow())
+        foreach (var VARIABLE in RodBagData.GetAllRod().Rod)
         {
-            spawnEquipmentButton(nextID);
-            return;
+            if (VARIABLE != RodBagData.GetRodNow())
+            {
+                EquipmentButton _equipmentButton = Instantiate(_equipmentButtonBase,transform).GetComponent<EquipmentButton>();
+                _equipmentButton.Init(VARIABLE);
+                _equipmentButton.SetupText(VARIABLE.Name,VARIABLE.RopeDownSpeed,VARIABLE.MaxRopeLength,VARIABLE.RodSpinSpeed);
+            }
         }
-
-        JsonClass.Rod rod = RodBagData.GetTheRod(ID);
-        //結束
-        if (rod == null)
-        {
-            SetLenth(gridHright*(ID-1));
-            return;
-        };
-        
-        EquipmentButton _equipmentButton = Instantiate(_equipmentButtonBase,transform).GetComponent<EquipmentButton>();
-        
-        _equipmentButton.Init(ID);
-        _equipmentButton.SetupText(rod.Name,rod.RopeDownSpeed,rod.MaxRopeLength,rod.RodSpinSpeed);
-        
-        spawnEquipmentButton(nextID);
     }
 
     void SetLenth(float bottom)
