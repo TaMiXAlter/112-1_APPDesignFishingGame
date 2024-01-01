@@ -16,6 +16,7 @@
             public string Name;
             public int Price;
             public int Num;
+            public float Speed;
         }
         
         [System.Serializable]
