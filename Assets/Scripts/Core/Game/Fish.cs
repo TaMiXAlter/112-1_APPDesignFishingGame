@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Interface;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fish : MonoBehaviour
 {
@@ -21,8 +21,10 @@ public class Fish : MonoBehaviour
         rt = GetComponent<RectTransform>();
     }
 
-    void OnEnable()
+    void Start()
     {
+        fishImage = GetComponent<Image>();
+
         Rect rect = rt.rect;
 
         // Get the present rect status.
@@ -46,6 +48,32 @@ public class Fish : MonoBehaviour
         {
             //fishImage = 
             fishType = "橫帶石鯛";
+        }
+
+        Texture2D tempTexture2D;
+
+        switch(fishType)
+        {
+            case "帶魚":
+                tempTexture2D = Resources.Load("Trichiurus_lepturus") as Texture2D;
+                fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
+                break;
+            case "鯧魚":
+                tempTexture2D = Resources.Load("White_Pomfret") as Texture2D;
+                fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
+                break;
+            case "鯛魚":
+                tempTexture2D = Resources.Load("Sparidae") as Texture2D;
+                fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
+                break;
+            case "黃魚":
+                tempTexture2D = Resources.Load("Larimichthys_crocea") as Texture2D;
+                fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
+                break;
+            case "橫帶石鯛":
+                tempTexture2D = Resources.Load("Blue_Oplegnathus_fasciatus") as Texture2D;
+                fishImage.sprite = Sprite.Create(tempTexture2D, new Rect(0, 0, tempTexture2D.width, tempTexture2D.height), new Vector2(0.5f ,0.5f));
+                break;
         }
     }
 
