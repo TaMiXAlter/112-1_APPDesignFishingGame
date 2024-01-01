@@ -33,18 +33,19 @@ public class Fish : MonoBehaviour
 
         if(topSide <= -450 && topSide > -750)
         {
-            //fishImage = 
-            fishType = "NormalFish";
+            string[] fishes = new[] { "帶魚", "鯧魚", "鯛魚" };
+             //fishImage = 
+            fishType = fishes[Random.Range(0,3)] ;
         }
         else if(topSide <= -750 && topSide > -900)
         {
             //fishImage = 
-            fishType = "RareFish";
+            fishType = "黃魚";
         }
         else if(topSide <= -900)
         {
             //fishImage = 
-            fishType = "SuperRareFish";
+            fishType = "橫帶石鯛";
         }
     }
 

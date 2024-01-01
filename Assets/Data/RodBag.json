@@ -1,7 +1,7 @@
 {
     "EquipmentNow": {
         "RodID": 4,
-        "Money": 1700
+        "Money": 1745
     },
     "Rod": [
         {
@@ -42,6 +42,22 @@
             "RopeDownSpeed": 4.811026573181152,
             "MaxRopeLength": 1548.0,
             "RodSpinSpeed": 3.0,
+            "Durability": 0
+        },
+        {
+            "ID": 5,
+            "Name": "NormalFishingRod",
+            "RopeDownSpeed": 1.0594507455825806,
+            "MaxRopeLength": 625.0,
+            "RodSpinSpeed": 1.0,
+            "Durability": 0
+        },
+        {
+            "ID": 6,
+            "Name": "RareFishingRod",
+            "RopeDownSpeed": 2.695923089981079,
+            "MaxRopeLength": 927.0,
+            "RodSpinSpeed": 2.0,
             "Durability": 0
         }
     ]

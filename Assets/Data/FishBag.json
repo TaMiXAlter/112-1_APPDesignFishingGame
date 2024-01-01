@@ -1,18 +1,28 @@
 {
     "FishOwnsNum": [
         {
-            "Name": "NormalFish",
+            "Name": "帶魚",
             "Price": 10,
-            "Num": 9
-        },
-        {
-            "Name": "RareFish",
-            "Price": 20,
             "Num": 0
         },
         {
-            "Name": "SuperRareFish",
+            "Name": "鯧魚",
+            "Price": 15,
+            "Num": 0
+        },
+        {
+            "Name": "橫帶石鯛",
             "Price": 50,
+            "Num": 0
+        },
+        {
+            "Name": "黃魚",
+            "Price": 30,
+            "Num": 0
+        },
+        {
+            "Name": "鯛魚",
+            "Price": 20,
             "Num": 0
         }
     ]
